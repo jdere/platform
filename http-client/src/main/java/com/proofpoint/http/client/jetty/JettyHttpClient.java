@@ -164,6 +164,9 @@ public class JettyHttpClient
             sslContextFactory.setTrustStorePath(config.getTrustStorePath());
             sslContextFactory.setTrustStorePassword(config.getTrustStorePassword());
         }
+        if (config.isIgnoreCertValidation()) {
+            sslContextFactory.setTrustAll(config.isIgnoreCertValidation());
+        }
 
         HttpClientTransport transport;
         if (config.isHttp2Enabled()) {

@@ -65,6 +65,7 @@ public class HttpClientConfig
     private DataSize http2InitialStreamReceiveWindowSize = new DataSize(16, MEGABYTE);
     private DataSize http2InputBufferSize = new DataSize(8, KILOBYTE);
     private int selectorCount = 2;
+    private boolean ignoreCertValidation = false;
 
     public boolean isHttp2Enabled()
     {
@@ -361,6 +362,19 @@ public class HttpClientConfig
     public HttpClientConfig setTimeoutConcurrency(int timeoutConcurrency)
     {
         this.timeoutConcurrency = timeoutConcurrency;
+        return this;
+    }
+
+    public boolean isIgnoreCertValidation()
+    {
+        return ignoreCertValidation;
+    }
+
+    @Config("http-client.ignore-cert-validation")
+    @ConfigDescription("Whether validation of certificates is disabled")
+    public HttpClientConfig setIgnoreCertValidation(boolean ignoreCertValidation)
+    {
+        this.ignoreCertValidation = ignoreCertValidation;
         return this;
     }
 }

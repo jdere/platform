@@ -91,6 +91,19 @@ public class TestJettyHttpsClient
         executeRequest(request, new ExceptionResponseHandler());
     }
 
+    @Test
+    public void testIgnoreCertValidation()
+            throws Exception
+    {
+        HttpClientConfig httpClientConfig = createClientConfig().setIgnoreCertValidation(true);
+        URI uri = new URI("https", null, "127.0.0.1", baseURI.getPort(), "/", null, null);
+        Request request = prepareGet()
+            .setUri(uri)
+            .build();
+
+        executeRequest(httpClientConfig, request, new PassThroughResponseHandler());
+    }
+
     @Override
     @Test(expectedExceptions = {IOException.class, IllegalStateException.class})
     public void testConnectReadRequestClose()
